@@ -142,10 +142,6 @@ fragment SPACE
 fragment ASCIISYMBOLS
    : '!'..'~'
    ;
-CHARACTER
-   : SPACE
-   | ASCIISYMBOLS
-   ;
 ALPHA
    : 'a' .. 'z'
    | 'A' .. 'Z'
@@ -153,22 +149,16 @@ ALPHA
 DIGIT
    : ('0' .. '9')
    ;
+CHARACTER
+   : SPACE
+   | ASCIISYMBOLS
+   ;
 NEWLINE
    : '\r'? '\n'
    ;
 STRING
    : '"' (ASCIISYMBOLS | SPACE)* '"'
    ;
-IF
-   : 'if'
-   ;
-ELSE
-   : 'else'
-   ;
-FOR
-   : 'for'
-   ;
-
 WS
    : [ \t] + -> channel (HIDDEN)
    ;
