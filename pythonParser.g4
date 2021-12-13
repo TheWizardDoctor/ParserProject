@@ -1,39 +1,34 @@
 grammar pythonParser;
 
-expression
-   : multiplyingExpression ((PLUS | MINUS) multiplyingExpression)*
-   ;
-multiplyingExpression
-   : number ((TIMES | DIV) number)*
-   ;
 number
-   : MINUS? DIGIT + 
+   : '-'? DIGIT + 
    ;
 if
-   : SPACE* 'if(' CONDITION '):' NEWLINE+
-   | SPACE* 'if' CONDITION ':' NEWLINE+
+   : (' ')* 'if(' condition '):' NEWLINE+
+   | (' ')* 'if' condition ':' NEWLINE+
    ;
 elif
-   : SPACE* 'elif(' CONDITION '):' NEWLINE+
-   | SPACE* 'elif' CONDITION ':' NEWLINE+
+   : (' ')* 'elif(' condition '):' NEWLINE+
+   | (' ')* 'elif' condition ':' NEWLINE+
+   ;
 else
-   : SPACE* 'else:' NEWLINE+
+   : (' ')* 'else:' NEWLINE+
    ;
 for
-   : SPACE* 'for' VALUE 'in range(VALUE2,VALUE3):' NEWLINE+
+   : (' ')* 'for' value 'in range(' value ',' value '):' NEWLINE+
    ;
 condition
-   : VALUE CONDOP VALUE
+   : value CONDOP value
    ;
 value
-   : number (ARITHOP number)* (ARITHOP VARIABLE)*
-   | VARIABLE
+   : number (ARITHOP number)* (ARITHOP variable)*
+   | variable
    ;
 assign
-   : VARIABLE ASSOP value
+   : variable ASSOP value
    ;
 comment
-   : SPACE* '#' CHARACTER* NEWLINE*
+   : (' ')* '#' CHARACTER* NEWLINE*
    ;
 variable
    : (ALPHA | '_') (ALPHA | DIGIT | '_')*
@@ -62,7 +57,7 @@ fragment MOD
 fragment POW
    : '^'
    ;
-fragment ARITHOP
+ARITHOP
    : TIMES
    | DIV
    | PLUS
@@ -74,8 +69,32 @@ fragment ARITHOP
 fragment EQU
    : '='
    ;
+fragment PLUS_EQU
+   : '+='
+   ;
+fragment MINUS_EQU
+   : '-='
+   ;
+fragment TIMES_EQU
+   : '*='
+   ;
+fragment DIV_EQU
+   : '/='
+   ;
+fragment MOD_EQU
+   : '%='
+   ;
+fragment POW_EQU
+   : '^='
+   ;
 ASSOP
-   : ARITHOP?EQU
+   : EQU
+   | PLUS_EQU
+   | MINUS_EQU
+   | TIMES_EQU
+   | DIV_EQU
+   | MOD_EQU
+   | POW_EQU
    ;
 
 fragment LT
@@ -94,7 +113,7 @@ fragment DEQU
    : '=='
    ;
 fragment NOTEQU
-   : '!="
+   : '!='
    ;
 fragment AND
    : 'and'
@@ -139,6 +158,15 @@ NEWLINE
    ;
 STRING
    : '"' (ASCIISYMBOLS | SPACE)* '"'
+   ;
+IF
+   : 'if'
+   ;
+ELSE
+   : 'else'
+   ;
+FOR
+   : 'for'
    ;
 
 WS
