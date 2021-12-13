@@ -15,8 +15,12 @@ else_stmnt
    : (' ')* 'else:' NEWLINE+
    ;
 for_stmnt
-   : (' ')* 'for' value 'in range(' value ',' value '):' NEWLINE+
+   : (' ')* 'for ' value ' in range(' value ', ' value '):' NEWLINE+
    ;
+while_stmnt
+	: (' ')* 'while' condition CONDOP condition ':' NEWLINE+
+	| (' ')* 'while' (' ')* '(' condition CONDOP condition '):' NEWLINE+
+	;
 condition
    : (' ')* value (' ')* CONDOP (' ')* value (' ')*
    ;
