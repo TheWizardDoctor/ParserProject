@@ -3,18 +3,18 @@ grammar pythonParser;
 number
    : '-'? DIGIT + 
    ;
-if
+if_stmnt
    : (' ')* 'if(' condition '):' NEWLINE+
    | (' ')* 'if' condition ':' NEWLINE+
    ;
-elif
+elif_stmnt
    : (' ')* 'elif(' condition '):' NEWLINE+
    | (' ')* 'elif' condition ':' NEWLINE+
    ;
-else
+else_stmnt
    : (' ')* 'else:' NEWLINE+
    ;
-for
+for_stmnt
    : (' ')* 'for' value 'in range(' value ',' value '):' NEWLINE+
    ;
 condition
