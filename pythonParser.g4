@@ -4,7 +4,7 @@ number
    : '-'? DIGIT + 
    ;
 if_stmnt
-   : (' ')* 'if(' condition '):' NEWLINE+
+   : (' ')* 'if' (' ')* '(' condition '):' NEWLINE+
    | (' ')* 'if' condition ':' NEWLINE+
    ;
 elif_stmnt
@@ -18,11 +18,11 @@ for_stmnt
    : (' ')* 'for' value 'in range(' value ',' value '):' NEWLINE+
    ;
 condition
-   : value CONDOP value
+   : (' ')* value (' ')* CONDOP (' ')* value (' ')*
    ;
 value
    : number (ARITHOP number)* (ARITHOP variable)*
-   | variable
+   | variable (ARITHOP number)* (ARITHOP variable)*
    ;
 assign
    : variable ASSOP value
