@@ -157,7 +157,8 @@ fragment SPACE
    : ' '
    ;
 fragment ASCIISYMBOLS
-   : '!'..'~'
+   : '!'
+   | '#'..'~'
    ;
 ALPHA
    : 'a' .. 'z'
