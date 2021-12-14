@@ -37,8 +37,8 @@ for_stmnt
    : (' ')* 'for ' value ' in range(' value ', ' value '):' NEWLINE+
    ;
 while_stmnt
-	: (' ')* 'while' condition ':' NEWLINE+
-	| (' ')* 'while' (' ')* '(' condition '):' NEWLINE+
+	: (' ')* 'while' condition (CONDOP condition)*':' NEWLINE+
+	| (' ')* 'while' (' ')* '(' condition (CONDOP condition)*'):' NEWLINE+
 	;
 condition
    : (' ')* value (' ')* CONDOP (' ')* value (' ')*
@@ -47,6 +47,7 @@ value
    : number (ARITHOP number)* (ARITHOP variable)*
    | variable (ARITHOP number)* (ARITHOP variable)*
    | STRING
+   | func
    ;
 assign
    : variable (' ')* ASSOP (' ')* value (' ')* NEWLINE+
@@ -68,10 +69,10 @@ func
    ;
 
 str_func
-   : (' ')* 'str(' (variable | (DIGIT)+ ) ')' 
+   : (' ')* 'str(' value ')' 
    ;
 int_func
-   : (' ')* 'int(' ( DIGIT+ | CHARACTER+ ) (',' (  ) ) ')' 
+   : (' ')* 'int(' value ')' 
    ;
 
 
