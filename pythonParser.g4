@@ -1,13 +1,14 @@
 grammar pythonParser;
 
 code
-   : ((' ')* line NEWLINE*)+
+   : ((' ')* line)+
    ;
 line
-   : control_stmnt
+   : comment
+   | control_stmnt
    | assign
    | func
-   | comment
+   | print_func
    ;
 
 control_stmnt
@@ -47,10 +48,10 @@ value
    | variable (ARITHOP number)* (ARITHOP variable)*
    ;
 assign
-   : variable ASSOP value
+   : variable ASSOP value NEWLINE+
    ;
 comment
-   : (' ')* '#' CHARACTER* NEWLINE*
+   : (' ')* '#' CHARACTER+ NEWLINE+
    ;
 variable
    : (ALPHA | '_') (ALPHA | DIGIT | '_')*
@@ -175,8 +176,16 @@ fragment SPACE
    : ' '
    ;
 fragment ASCIISYMBOLS
-   : '!'
-   | '#'..'~'
+   : '!' .. '/'
+   | ':' .. '@'
+   | '[' .. '`'
+   | '{' .. '~'
+   ;
+CHARACTER
+   : SPACE
+   | ASCIISYMBOLS
+   | ALPHA
+   | DIGIT
    ;
 ALPHA
    : 'a' .. 'z'
@@ -184,10 +193,6 @@ ALPHA
    ;
 DIGIT
    : ('0' .. '9')
-   ;
-CHARACTER
-   : SPACE
-   | ASCIISYMBOLS
    ;
 NEWLINE
    : '\r'? '\n'
