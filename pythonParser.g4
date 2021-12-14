@@ -76,110 +76,41 @@ break_stmnt
    : 'break' NEWLINE+
    ;
 
-
-
-fragment PLUS
-   : '+'
-   ;
-fragment MINUS
-   : '-'
-   ;
-fragment TIMES
-   : '*'
-   ;
-fragment DIV
-   : '/'
-   ;
-fragment MOD
-   : '%'
-   ;
-fragment POW
-   : '^'
-   ;
 ARITHOP
-   : TIMES
-   | DIV
-   | PLUS
-   | MINUS
-   | MOD
-   | POW
-   ;
-
-fragment EQU
-   : '='
-   ;
-fragment PLUS_EQU
-   : '+='
-   ;
-fragment MINUS_EQU
-   : '-='
-   ;
-fragment TIMES_EQU
-   : '*='
-   ;
-fragment DIV_EQU
-   : '/='
-   ;
-fragment MOD_EQU
-   : '%='
-   ;
-fragment POW_EQU
-   : '^='
+   : '*'
+   | '/'
+   | '+'
+   | '-'
+   | '%'
+   | '^'
    ;
 ASSOP
-   : EQU
-   | PLUS_EQU
-   | MINUS_EQU
-   | TIMES_EQU
-   | DIV_EQU
-   | MOD_EQU
-   | POW_EQU
+   : '='
+   | '+='
+   | '-='
+   | '*='
+   | '/='
+   | '%='
+   | '^='
+   ;
+CONDOP
+   : '<'
+   | '<='
+   | '>'
+   | '>='
+   | '=='
+   | '!='
+   | 'and'
+   | 'or'
+   | 'not'
    ;
 
-fragment LT
-   : '<'
-   ;
-fragment LTE
-   : '<='
-   ;
-fragment GT
-   : '>'
-   ;
-fragment GTE
-   : '>='
-   ;
-fragment DEQU
-   : '=='
-   ;
-fragment NOTEQU
-   : '!='
-   ;
-fragment AND
-   : 'and'
-   ;
-fragment OR
-   : 'or'
-   ;
-fragment NOT
-   : 'not'
-   ;
 fragment ALPHAFRAG
    : 'a' .. 'z'
    | 'A' .. 'Z'
    ;
 fragment DIGITFRAG
    : ('0' .. '9')
-   ;
-CONDOP
-   : LT
-   | LTE
-   | GT
-   | GTE
-   | DEQU
-   | NOTEQU
-   | AND
-   | OR
-   | NOT
    ;
 fragment ASCIISYMBOLS
    : '!' .. '/'
