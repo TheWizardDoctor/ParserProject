@@ -18,8 +18,8 @@ for_stmnt
    : (' ')* 'for ' value ' in range(' value ', ' value '):' NEWLINE+
    ;
 while_stmnt
-	: (' ')* 'while' condition CONDOP condition ':' NEWLINE+
-	| (' ')* 'while' (' ')* '(' condition CONDOP condition '):' NEWLINE+
+	: (' ')* 'while' condition ':' NEWLINE+
+	| (' ')* 'while' (' ')* '(' condition '):' NEWLINE+
 	;
 condition
    : (' ')* value (' ')* CONDOP (' ')* value (' ')*
@@ -38,9 +38,15 @@ variable
    : (ALPHA | '_') (ALPHA | DIGIT | '_')*
    ;
 print
-   : (' ')* 'print' (' ')* '(' (variable | STRING | (' ')*) ')'
-   | (' ')* 'print' (' ')* '(' (variable | STRING ) (' ')* ( '+' (' ')* (variable | STRING ) )+  ')'
+   : (' ')* 'print' (' ')* '(' (variable | STRING | func | (' ')*) ')'
+   | (' ')* 'print' (' ')* '(' (variable | STRING |func ) (' ')* ( '+' (' ')* (variable | STRING | func) )+  ')'
    ;
+
+func
+   : str_func
+   | int_func
+   ;
+
 str_func
    : (' ')* 'str(' (variable | (DIGIT)+ ) ')' 
    ;
