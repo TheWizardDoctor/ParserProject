@@ -17,6 +17,7 @@ control_stmnt
    | else_stmnt
    | for_stmnt
    | while_stmnt
+   | break_stmnt
    ;
 
 number
@@ -73,6 +74,10 @@ str_func
    ;
 int_func
    : (' ')* 'int(' value ')' 
+   ;
+
+break_stmnt
+   : 'break' NEWLINE+
    ;
 
 
