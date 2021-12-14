@@ -4,8 +4,7 @@ code
    : (TAB* line)+
    ;
 line
-   : comment
-   | control_stmnt
+   : control_stmnt
    | assign
    | func
    | print_func
@@ -52,9 +51,6 @@ value
    ;
 assign
    : variable ASSOP value NEWLINE+
-   ;
-comment
-   : '#' (CHARACTER | ASSOP | CONDOP | ARITHOP | DIGIT)+ NEWLINE+
    ;
 variable
    : (CHARACTER | '_') (CHARACTER | DIGIT | '_')*
@@ -208,6 +204,9 @@ NEWLINE
    ;
 STRING
    : '"' (CHARACTER | ' ')* '"'
+   ;
+COMMENT
+   : '#' (~[\r\n])* NEWLINE -> skip
    ;
 WS
    : [ \t] + -> channel (HIDDEN)
