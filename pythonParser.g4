@@ -52,14 +52,14 @@ assign
    : variable (' ')* ASSOP (' ')* value (' ')* NEWLINE+
    ;
 comment
-   : (' ')* '#' (CHARACTER | ' ')+ NEWLINE+
+   : (' ')* '#' (CHARACTER | ASSOP | CONDOP | ARITHOP | ' ')+ NEWLINE+
    ;
 variable
-   : (ALPHA | '_') (ALPHA | DIGIT | '_')*
+   : (CHARACTER | '_') (CHARACTER | DIGIT | '_')*
    ;
 print_func
-   : (' ')* 'print' (' ')* '(' (variable | STRING | func | (' ')*) ')'
-   | (' ')* 'print' (' ')* '(' (variable | STRING |func ) (' ')* ( '+' (' ')* (variable | STRING | func) )+  ')'
+   : (' ')* 'print' (' ')* '(' (variable | STRING | func | (' ')*) ')' NEWLINE+
+   | (' ')* 'print' (' ')* '(' (variable | STRING |func ) (' ')* ( '+' (' ')* (variable | STRING | func) )+  ')' NEWLINE+
    ;
 
 func
@@ -189,9 +189,6 @@ fragment ASCIISYMBOLS
    | '[' .. '`'
    | '{' .. '~'
    ;
-ALPHA
-   : ALPHAFRAG
-   ;
 DIGIT
    : DIGITFRAG
    ;
@@ -199,8 +196,9 @@ DIGIT
 CHARACTER
    : SPACE
    | ASCIISYMBOLS
-   | ALPHA
-   | DIGIT
+   | ALPHAFRAG
+   | DIGITFRAG
+   | '-'
    ;
 
 NEWLINE
