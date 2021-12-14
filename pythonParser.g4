@@ -1,5 +1,23 @@
 grammar pythonParser;
 
+code
+   : ((' ')* line NEWLINE*)+
+   ;
+line
+   : control_stmnt
+   | assign
+   | func
+   | comment
+   ;
+
+control_stmnt
+   : if_stmnt
+   | elif_stmnt
+   | else_stmnt
+   | for_stmnt
+   | while_stmnt
+   ;
+
 number
    : '-'? DIGIT + 
    ;
@@ -37,7 +55,7 @@ comment
 variable
    : (ALPHA | '_') (ALPHA | DIGIT | '_')*
    ;
-print
+print_func
    : (' ')* 'print' (' ')* '(' (variable | STRING | func | (' ')*) ')'
    | (' ')* 'print' (' ')* '(' (variable | STRING |func ) (' ')* ( '+' (' ')* (variable | STRING | func) )+  ')'
    ;
