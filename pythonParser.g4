@@ -38,7 +38,8 @@ variable
    : (ALPHA | '_') (ALPHA | DIGIT | '_')*
    ;
 print
-   :
+   : (' ')* 'print' (' ')* '(' (variable | STRING | (' ')*) ')'
+   | (' ')* 'print' (' ')* '(' (variable | STRING ) (' ')* ( '+' (' ')* (variable | STRING ) )+  ')'
    ;
 
 
