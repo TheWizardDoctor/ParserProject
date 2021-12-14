@@ -46,12 +46,13 @@ condition
 value
    : number (ARITHOP number)* (ARITHOP variable)*
    | variable (ARITHOP number)* (ARITHOP variable)*
+   | STRING
    ;
 assign
-   : variable ASSOP value NEWLINE+
+   : variable (' ')* ASSOP (' ')* value (' ')* NEWLINE+
    ;
 comment
-   : (' ')* '#' CHARACTER+ NEWLINE+
+   : (' ')* '#' (CHARACTER | ' ')+ NEWLINE+
    ;
 variable
    : (ALPHA | '_') (ALPHA | DIGIT | '_')*
@@ -160,6 +161,13 @@ fragment OR
 fragment NOT
    : 'not'
    ;
+fragment ALPHAFRAG
+   : 'a' .. 'z'
+   | 'A' .. 'Z'
+   ;
+fragment DIGITFRAG
+   : ('0' .. '9')
+   ;
 CONDOP
    : LT
    | LTE
@@ -181,24 +189,25 @@ fragment ASCIISYMBOLS
    | '[' .. '`'
    | '{' .. '~'
    ;
+ALPHA
+   : ALPHAFRAG
+   ;
+DIGIT
+   : DIGITFRAG
+   ;
+   
 CHARACTER
    : SPACE
    | ASCIISYMBOLS
    | ALPHA
    | DIGIT
    ;
-ALPHA
-   : 'a' .. 'z'
-   | 'A' .. 'Z'
-   ;
-DIGIT
-   : ('0' .. '9')
-   ;
+
 NEWLINE
    : '\r'? '\n'
    ;
 STRING
-   : '"' (ASCIISYMBOLS | SPACE)* '"'
+   : '"' CHARACTER* '"'
    ;
 WS
    : [ \t] + -> channel (HIDDEN)
