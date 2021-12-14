@@ -41,6 +41,12 @@ print
    : (' ')* 'print' (' ')* '(' (variable | STRING | (' ')*) ')'
    | (' ')* 'print' (' ')* '(' (variable | STRING ) (' ')* ( '+' (' ')* (variable | STRING ) )+  ')'
    ;
+str_func
+   : (' ')* 'str(' (variable | (DIGIT)+ ) ')' 
+   ;
+int_func
+   : (' ')* 'int(' ( DIGIT+ | CHARACTER+ ) (',' (  ) ) ')' 
+   ;
 
 
 
