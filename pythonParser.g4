@@ -1,7 +1,7 @@
 grammar pythonParser;
 
 code
-   : ((' ')* line)+
+   : (TAB* line)+
    ;
 line
    : comment
@@ -24,25 +24,25 @@ number
    : '-'? DIGIT + 
    ;
 if_stmnt
-   : (' ')* 'if' (' ')* '(' condition '):' NEWLINE+
-   | (' ')* 'if' condition ':' NEWLINE+
+   : 'if' '(' condition '):' NEWLINE+
+   | 'if' condition ':' NEWLINE+
    ;
 elif_stmnt
-   : (' ')* 'elif(' condition '):' NEWLINE+
-   | (' ')* 'elif' condition ':' NEWLINE+
+   : 'elif(' condition '):' NEWLINE+
+   | 'elif' condition ':' NEWLINE+
    ;
 else_stmnt
-   : (' ')* 'else:' NEWLINE+
+   : 'else:' NEWLINE+
    ;
 for_stmnt
-   : (' ')* 'for ' value ' in range(' value ', ' value '):' NEWLINE+
+   : 'for ' value ' in range(' value ', ' value '):' NEWLINE+
    ;
 while_stmnt
-	: (' ')* 'while' condition (CONDOP condition)*':' NEWLINE+
-	| (' ')* 'while' (' ')* '(' condition (CONDOP condition)*'):' NEWLINE+
+	: 'while' condition (CONDOP condition)*':' NEWLINE+
+	| 'while' '(' condition (CONDOP condition)*'):' NEWLINE+
 	;
 condition
-   : (' ')* value (' ')* CONDOP (' ')* value (' ')*
+   : value CONDOP value
    ;
 value
    : number (ARITHOP number)* (ARITHOP variable)*
@@ -51,17 +51,17 @@ value
    | func
    ;
 assign
-   : variable (' ')* ASSOP (' ')* value (' ')* NEWLINE+
+   : variable ASSOP value NEWLINE+
    ;
 comment
-   : (' ')* '#' (CHARACTER | ASSOP | CONDOP | ARITHOP | ' ')+ NEWLINE+
+   : '#' (CHARACTER | ASSOP | CONDOP | ARITHOP | DIGIT)+ NEWLINE+
    ;
 variable
    : (CHARACTER | '_') (CHARACTER | DIGIT | '_')*
    ;
 print_func
-   : (' ')* 'print' (' ')* '(' (variable | STRING | func | (' ')*) ')' NEWLINE+
-   | (' ')* 'print' (' ')* '(' (variable | STRING |func ) (' ')* ( '+' (' ')* (variable | STRING | func) )+  ')' NEWLINE+
+   : 'print' '(' (variable | STRING | func) ')' NEWLINE+
+   | 'print' '(' (variable | STRING | func ) ( '+' (variable | STRING | func) )+  ')' NEWLINE+
    ;
 
 func
@@ -70,10 +70,10 @@ func
    ;
 
 str_func
-   : (' ')* 'str(' value ')' 
+   : 'str(' value ')' 
    ;
 int_func
-   : (' ')* 'int(' value ')' 
+   : 'int(' value ')' 
    ;
 
 break_stmnt
@@ -185,10 +185,6 @@ CONDOP
    | OR
    | NOT
    ;
-
-fragment SPACE
-   : ' '
-   ;
 fragment ASCIISYMBOLS
    : '!' .. '/'
    | ':' .. '@'
@@ -200,18 +196,18 @@ DIGIT
    ;
    
 CHARACTER
-   : SPACE
-   | ASCIISYMBOLS
+   : ASCIISYMBOLS
    | ALPHAFRAG
    | DIGITFRAG
-   | '-'
    ;
-
+TAB
+   : '    '
+   ;
 NEWLINE
    : '\r'? '\n'
    ;
 STRING
-   : '"' CHARACTER* '"'
+   : '"' (CHARACTER | ' ')* '"'
    ;
 WS
    : [ \t] + -> channel (HIDDEN)
