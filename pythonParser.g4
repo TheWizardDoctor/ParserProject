@@ -44,10 +44,14 @@ condition
    : value CONDOP value
    ;
 value
-   : number (ARITHOP value)*
-   | variable (ARITHOP value)*
-   | STRING (ARITHOP value)*
-   | func (ARITHOP value)*
+   : number (ARITHOP value)?
+   | variable (ARITHOP value)?
+   | STRING (ARITHOP value)?
+   | func (ARITHOP value)?
+   | number ('+' value)?
+   | variable ('+' value)?
+   | STRING ('+' value)?
+   | func ('+' value)?
    ;
 assign
    : variable ASSOP value NEWLINE+
@@ -79,7 +83,6 @@ break_stmnt
 ARITHOP
    : '*'
    | '/'
-   | '+'
    | '-'
    | '%'
    | '^'
