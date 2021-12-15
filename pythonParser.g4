@@ -1,7 +1,7 @@
 grammar pythonParser;
 
 code
-   : (TAB* line)+
+   : (indent? line)+
    ;
 line
    : control_stmnt
@@ -17,6 +17,10 @@ control_stmnt
    | for_stmnt
    | while_stmnt
    | break_stmnt
+   ;
+
+indent
+   : TAB
    ;
 
 number
@@ -132,7 +136,7 @@ CHARACTER
    | DIGITFRAG
    ;
 TAB
-   : '    '
+   : ('    ')+
    ;
 NEWLINE
    : '\r'? '\n'
