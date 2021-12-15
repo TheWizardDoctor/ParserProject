@@ -140,7 +140,7 @@ STRING
    : '"' (CHARACTER | ' ')* '"'
    ;
 COMMENT
-   : '#' (~[\r\n])* NEWLINE -> skip
+   : '#' (~[\r\n])* NEWLINE? -> skip
    ;
 WS
    : [ \t] + -> channel (HIDDEN)
