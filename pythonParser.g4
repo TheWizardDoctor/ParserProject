@@ -34,7 +34,7 @@ else_stmnt
    : 'else:' NEWLINE+
    ;
 for_stmnt
-   : 'for ' value ' in range(' value ', ' value '):' NEWLINE+
+   : 'for ' value ' in range('value ', ' value '):' NEWLINE+
    ;
 while_stmnt
 	: 'while' condition (CONDOP condition)*':' NEWLINE+
@@ -44,10 +44,10 @@ condition
    : value CONDOP value
    ;
 value
-   : number (ARITHOP number)* (ARITHOP variable)*
-   | variable (ARITHOP number)* (ARITHOP variable)*
-   | STRING
-   | func
+   : number (ARITHOP value)*
+   | variable (ARITHOP value)*
+   | STRING (ARITHOP value)*
+   | func (ARITHOP value)*
    ;
 assign
    : variable ASSOP value NEWLINE+
