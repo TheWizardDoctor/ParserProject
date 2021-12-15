@@ -116,7 +116,8 @@ fragment DIGITFRAG
    : ('0' .. '9')
    ;
 fragment ASCIISYMBOLS
-   : '!' .. '/'
+   : '!'
+   | '#' .. '/'
    | ':' .. '@'
    | '[' .. '`'
    | '{' .. '~'
