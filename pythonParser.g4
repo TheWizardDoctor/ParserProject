@@ -1,6 +1,6 @@
 grammar pythonParser;
 
-code
+entry
    : (indent? line)+
    ;
 line
@@ -85,7 +85,8 @@ break_stmnt
    ;
 
 ARITHOP
-   : '*'
+   : '+'
+   | '*'
    | '/'
    | '-'
    | '%'
