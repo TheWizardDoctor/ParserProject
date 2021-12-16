@@ -24,9 +24,11 @@ This project can be run by writing the following commands in command line. Depen
 
 ```
 antlr4 pythonParser.g4
-
+```
+```
 javac pythonParser*.java
-
+```
+```
 grun pythonParser entry -gui python_test_code.py
 ```
 
