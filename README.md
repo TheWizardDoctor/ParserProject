@@ -33,3 +33,6 @@ grun pythonParser entry -gui python_test_code.py
 ```
 
 Running these commands returns a parse tree of the provided `python_test_code.py` code.
+
+#### Parse Tree Video Demonstration
+A video example can be found [here](https://youtu.be/tH9wYWwHNxs) showcasing the steps required to create our parse tree visualization.
