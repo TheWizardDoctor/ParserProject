@@ -36,3 +36,6 @@ Running these commands returns a parse tree of the provided `python_test_code.py
 
 #### Parse Tree Video Demonstration
 A video example can be found [here](https://youtu.be/tH9wYWwHNxs) showcasing the steps required to create our parse tree visualization.
+
+#### Acknowledgment
+We utilized a few lines of an example grammar given by a TA for the course this grammar was written for. Notably, the "number" parser rule, the "DIGIT" lexer rule, and the "WS" lexer rule are based on the provided example.
